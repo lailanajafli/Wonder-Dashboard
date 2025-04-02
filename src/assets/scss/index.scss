@@ -1,0 +1,15 @@
+// Global styles
+@import "./base";
+
+// Components
+@import "./components/header";
+@import "./components/footer";
+@import "./components/loader";
+
+// Pages
+@import "./pages/home";
+@import "./pages/all-cars";
+@import "./pages/create-car";
+@import "./pages/edit-product";
+@import "./pages/login";
+@import "./pages/not-found";

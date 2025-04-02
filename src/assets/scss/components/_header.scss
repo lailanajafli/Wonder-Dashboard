@@ -1,0 +1,190 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
+  .container {
+    .row {
+      justify-content: space-between;
+      align-items: center;
+      .logo {
+        width: 164px;
+        height: 50px;
+        img {
+          width: 100%;
+          height: 100%;
+          filter: invert(1);
+          object-fit: contain;
+        }
+      }
+      .navBar {
+        .navList {
+          display: flex;
+          .navItem {
+            padding: 16px;
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            font-weight: 700px;
+            cursor: pointer;
+            a {
+              &.active {
+                background-color: rgba(234, 234, 234, 0.475);
+                padding: 1rem;
+                border-radius: 30px;
+              }
+            }
+          }
+        }
+      }
+      .userArea {
+        display: flex;
+        gap: 32px;
+        .cart {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          font-size: 18px;
+          cursor: pointer;
+          .count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #e27595;
+            color: #000000;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+          }
+        }
+        .login {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          font-size: 18px;
+        }
+        .logOut {
+          border: 0;
+          outline: 0;
+          background: transparent;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          font-size: 18px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .cartBox {
+    width: 400px;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #202424;
+    box-shadow: 1px 1px 10px 1px #ffffff50;
+    padding: 16px;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 99;
+    &.isOpen {
+      transform: translateX(0%);
+      opacity: 1;
+      visibility: visible;
+    }
+    .cartHead {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+      margin-bottom: 50px;
+      svg {
+        path {
+          cursor: pointer;
+        }
+      }
+    }
+    .cartList {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      .empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+      }
+      .cartItem {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 16px;
+        border-bottom: 1px solid #e27595;
+        .carImg {
+          width: 100px;
+          height: 50px;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+        .carInfo {
+          p {
+            color: #e27595;
+            margin-bottom: 5px;
+            font-weight: 700;
+          }
+        }
+      }
+      gap: 16px;
+      a {
+        display: inline-block;
+        background-color: #e27595;
+        color: #000000;
+        padding: 8px 12px;
+        border-radius: 15px;
+        border: 1px solid transparent;
+        &:hover {
+          background-color: #202424;
+
+        }
+      }
+    }
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    z-index: 1;
+    background-color: transparent;
+    visibility: hidden;
+    opacity: 0;
+    &.isOpen {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
