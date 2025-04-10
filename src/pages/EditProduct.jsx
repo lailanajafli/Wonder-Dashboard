@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 
 const EditProduct = () => {
@@ -20,6 +20,8 @@ const EditProduct = () => {
     created_at: "2025-05-02",
     stock: 15,
   });
+    const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -97,13 +99,15 @@ const EditProduct = () => {
     formData.append("name", productData.name);
     formData.append("details", productData.details);
     formData.append("price", productData.price);
-    formData.append("product", productData.image);
+    // formData.append("product", productData.image);
+    formData.append("productImage", image);
     try {
       const res = await axios.put(
         `${process.env.REACT_APP_UPDATE_PRODUCT}/${productID}`,
         formData
       );
       console.log(res);
+      navigate("/all-products");
     } catch (error) {
       console.log(error);
     } finally {
