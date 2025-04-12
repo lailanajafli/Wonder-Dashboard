@@ -5,10 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const newProductSchema = object({
   name: string().trim().min(3).required("Name is required"),
-  details: string().trim().min(10).required("Details are required"),
+  category: string().trim().min(4).required("Category is required"),
+  brand: string().trim().min(4).required("Brand is required"),
   price: string().trim().min(2).required("Price is required"),
 });
 
@@ -27,7 +29,6 @@ const CreateProduct = () => {
   });
 
   useEffect(() => {
-    // html və body üzərində stil dəyişiklikləri
     document.documentElement.style.margin = "0";
     document.documentElement.style.padding = "0";
     document.documentElement.style.height = "100vh";
@@ -38,7 +39,6 @@ const CreateProduct = () => {
     document.body.style.height = "100vh";
     document.body.style.overflow = "hidden";
 
-    // Cleanup function (komponent silindiyində bu tərz dəyişikliklərini geri qaytarır)
     return () => {
       document.documentElement.style.height = "";
       document.documentElement.style.overflow = "";
@@ -65,17 +65,43 @@ const CreateProduct = () => {
 
   const submitForm = async (data) => {
     setLoading(true);
+
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("details", data.details);
+    formData.append("category", data.category);
+    formData.append("brand", data.brand);
     formData.append("price", data.price);
     formData.append("productImage", image);
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      toast.error("Please log in.", {
+        position: "bottom-right",
+      });
+      navigate("/login");
+      return;
+    }
+
     try {
-      await axios.post(process.env.REACT_APP_CREATE_PRODUCT, formData);
+      const response = await axios.post(
+        process.env.REACT_APP_CREATE_PRODUCT,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Product added successfully!", {
+        position: "bottom-right",
+      });
       navigate("/all-products");
     } catch (error) {
-      console.log(error);
+      toast.error("An error occurred while adding the product!", {
+        position: "bottom-right",
+      });
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -99,44 +125,73 @@ const CreateProduct = () => {
             </h2>
             <div className="login-box">
               <form onSubmit={handleSubmit(submitForm)}>
-                <div className="user-box">
-                  <input
-                    className={errors.name && "error"}
-                    type="text"
-                    name="name"
-                    {...register("name")}
-                  />
-                  <label className={errors.name && "error"}>Product Name</label>
+                <div className="userBoxContainer">
+                  <div className="userBoxCont">
+                    <div className="user-box">
+                      <input
+                        className={errors.name && "error"}
+                        type="text"
+                        name="name"
+                        {...register("name")}
+                      />
+                      <label className={errors.name && "error"}>
+                        Product Name
+                      </label>
+                    </div>
+                    {errors.name && (
+                      <span className="errorMsg">{errors.name.message}</span>
+                    )}
+
+                    <div className="user-box">
+                      <input
+                        className={errors.category && "error"}
+                        type="text"
+                        name="category"
+                        {...register("category")}
+                      />
+                      <label className={errors.category && "error"}>
+                        Product Category
+                      </label>
+                    </div>
+                    {errors.category && (
+                      <span className="errorMsg">
+                        {errors.category.message}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="userBoxCont">
+                    <div className="user-box">
+                      <input
+                        className={errors.brand && "error"}
+                        type="text"
+                        name="brand"
+                        {...register("brand")}
+                      />
+                      <label className={errors.brand && "error"}>
+                        Product Brand
+                      </label>
+                    </div>
+                    {errors.brand && (
+                      <span className="errorMsg">{errors.brand.message}</span>
+                    )}
+
+                    <div className="user-box">
+                      <input
+                        className={errors.price && "error"}
+                        type="text"
+                        name="price"
+                        {...register("price")}
+                      />
+                      <label className={errors.price && "error"}>
+                        Product Price
+                      </label>
+                    </div>
+                    {errors.price && (
+                      <span className="errorMsg">{errors.price.message}</span>
+                    )}
+                  </div>
                 </div>
-                {errors.name && (
-                  <span className="errorMsg">{errors.name.message}</span>
-                )}
-                <div className="user-box">
-                  <input
-                    className={errors.details && "error"}
-                    type="text"
-                    name="details"
-                    {...register("details")}
-                  />
-                  <label className={errors.details && "error"}>
-                    Product Details
-                  </label>
-                </div>
-                {errors.details && (
-                  <span className="errorMsg">{errors.details.message}</span>
-                )}
-                <div className="user-box">
-                  <input
-                    className={errors.price && "error"}
-                    type="text"
-                    name="price"
-                    {...register("price")}
-                  />
-                  <label className={errors.price && "error"}>Product Price</label>
-                </div>
-                {errors.price && (
-                  <span className="errorMsg">{errors.price.message}</span>
-                )}
                 <div className="user-box">
                   <input
                     type="file"
@@ -152,7 +207,7 @@ const CreateProduct = () => {
                 </div>
                 <div
                   className={`btn ${
-                    (errors.name || errors.details || errors.price) && "error"
+                    (errors.name || errors.category || errors.price) && "error"
                   }`}
                 >
                   <button>

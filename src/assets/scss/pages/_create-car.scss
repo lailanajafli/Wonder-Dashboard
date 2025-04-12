@@ -1,4 +1,4 @@
-.createCartCon{
+.createCartCon {
   height: 100vh;
   overflow: hidden;
   .createCar {
@@ -7,14 +7,14 @@
     height: 100vh;
     background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
     overflow: hidden;
-    
+
     .container {
       .row {
         flex-direction: column;
         align-items: center;
         gap: 17px;
         .login-box {
-          width: 400px;
+          width: 590px;
           z-index: 5;
           padding: 30px;
           background: rgba(255, 255, 255, 0.987);
@@ -62,12 +62,11 @@
                 }
               }
             }
-            .errorMsg{
+            .errorMsg {
               color: red;
               font-size: 14px;
               display: flex;
               margin-bottom: 17px;
-              
             }
             .btn {
               text-align: end;
@@ -105,8 +104,8 @@
                   background: #1b2735;
                   color: #ffffff;
                   border-radius: 5px;
-                  box-shadow: 0 0 5px #0b0b2b, 0 0 25px #1b2735, 0 0 50px #090a0f,
-                    0 0 100px #1b2735;
+                  box-shadow: 0 0 5px #0b0b2b, 0 0 25px #1b2735,
+                    0 0 50px #090a0f, 0 0 100px #1b2735;
                 }
                 span {
                   position: absolute;
@@ -127,34 +126,36 @@
       }
     }
   }
-
+}
+.userBoxCont {
+  width: 100%;
 }
 
+.userBoxContainer {
+  display: flex;
+  gap: 20px;
+}
 
+.title {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
 
-
-
-// Ulduzların sayını müəyyən edən funksiya
 @function multiple-box-shadow($n) {
-  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  $value: "#{random(2000)}px #{random(2000)}px #FFF";
   @for $i from 2 through $n {
-    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+    $value: "#{$value} , #{random(2000)}px #{random(2000)}px #FFF";
   }
   @return unquote($value);
 }
 
-// Ulduzların sıxlığı
 $shadows-small: multiple-box-shadow(700);
 $shadows-medium: multiple-box-shadow(200);
 $shadows-big: multiple-box-shadow(100);
 
-// Ümumi səhifə tərzi
-html {
-
-}
-
-// Ulduz təbəqələri
-#stars, #stars2, #stars3 {
+#stars,
+#stars2,
+#stars3 {
   position: absolute;
   top: 0;
   left: 0;
@@ -216,15 +217,14 @@ html {
   }
 }
 
-// Başlıq
 #title {
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
-  color: #FFF;
+  color: #fff;
   text-align: center;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 300;
   font-size: 50px;
   letter-spacing: 10px;
@@ -238,7 +238,6 @@ html {
   }
 }
 
-// Ulduzların animasiyası
 @keyframes animStar {
   from {
     transform: translateY(0px);

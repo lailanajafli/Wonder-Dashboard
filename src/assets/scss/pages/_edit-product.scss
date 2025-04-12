@@ -1,5 +1,4 @@
-.editProductContainer{
-
+.editProductContainer {
   .editCar {
     width: 100%;
     padding: 110px 0;
@@ -12,7 +11,7 @@
         align-items: center;
         gap: 20px;
         .login-box {
-          width: 400px;
+          width: 590px;
           padding: 30px;
           background: rgba(255, 255, 255, 0.987);
           box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
@@ -89,12 +88,12 @@
                 transition: 0.5s;
                 margin-top: 20px;
                 letter-spacing: 4px;
-                 &:hover {
+                &:hover {
                   background: #1b2735;
                   color: #ffffff;
                   border-radius: 5px;
-                  box-shadow: 0 0 5px #0b0b2b, 0 0 25px #1b2735, 0 0 50px #090a0f,
-                    0 0 100px #1b2735;
+                  box-shadow: 0 0 5px #0b0b2b, 0 0 25px #1b2735,
+                    0 0 50px #090a0f, 0 0 100px #1b2735;
                 }
                 span {
                   position: absolute;
@@ -104,7 +103,7 @@
                     left: -100%;
                     width: 100%;
                     height: 2px;
-                    background: linear-gradient(90deg, transparent, #03f40f);
+                    background: linear-gradient(90deg, transparent, #0b0b2b);
                     animation: btn-anim1 2s linear infinite;
                   }
                 }
@@ -117,30 +116,21 @@
   }
 }
 
-
-
-
-// Ulduzların sayını müəyyən edən funksiya
 @function multiple-box-shadow($n) {
-  $value: '#{random(2000)}px #{random(2000)}px #FFF';
+  $value: "#{random(2000)}px #{random(2000)}px #FFF";
   @for $i from 2 through $n {
-    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF';
+    $value: "#{$value} , #{random(2000)}px #{random(2000)}px #FFF";
   }
   @return unquote($value);
 }
 
-// Ulduzların sıxlığı
 $shadows-small: multiple-box-shadow(700);
 $shadows-medium: multiple-box-shadow(200);
 $shadows-big: multiple-box-shadow(100);
 
-// Ümumi səhifə tərzi
-html {
-
-}
-
-// Ulduz təbəqələri
-#stars, #stars2, #stars3 {
+#stars,
+#stars2,
+#stars3 {
   position: absolute;
   top: 0;
   left: 0;
@@ -202,15 +192,14 @@ html {
   }
 }
 
-// Başlıq
 #title {
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
-  color: #FFF;
+  color: #fff;
   text-align: center;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 300;
   font-size: 50px;
   letter-spacing: 10px;
@@ -224,7 +213,6 @@ html {
   }
 }
 
-// Ulduzların animasiyası
 @keyframes animStar {
   from {
     transform: translateY(0px);

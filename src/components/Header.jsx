@@ -1,20 +1,30 @@
 // Router
-import { Link, NavLink } from "react-router-dom";
-
-// Images
-import logo from "../assets/images/logo.webp";
-
+import { Link, NavLink, useNavigate } from "react-router-dom";
 // Icons
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
-
+import { toast } from "react-toastify";
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    toast.success("Checked out👋", {
+      position: "bottom-right",
+    });
+
+    navigate("/login");
+  };
+
   return (
     <header className="header">
       <div className="container">
         <div className="row">
           <div className="logo">
             <Link to="/">
-              <img src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/Path_850.svg?v=1707730148&width=226" alt="logo" />
+              <img
+                src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/Path_850.svg?v=1707730148&width=226"
+                alt="logo"
+              />
             </Link>
           </div>
           <nav className="navBar">
@@ -31,7 +41,7 @@ const Header = () => {
             </ul>
           </nav>
           <div className="userArea">
-            <button className="logOut">
+            <button onClick={handleLogout} className="logOut">
               LOG OUT
               <FaSignOutAlt />
             </button>
