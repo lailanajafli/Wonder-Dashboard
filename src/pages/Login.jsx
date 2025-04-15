@@ -45,17 +45,15 @@ const Login = () => {
     try {
       const res = await axios.post(process.env.REACT_APP_LOGIN, loginData);
 
-      // Token'ı saxla
       localStorage.setItem("token", res.data.token);
 
-      toast.success("Giriş başarılı!", {
+      toast.success("Login successfulı!", {
         position: "bottom-right",
       });
 
-      // Dashboard'a yönlendir
       window.location.href = "/all-products";
     } catch (error) {
-      toast.error(error.response?.data?.message || "Bir hata oluştu!", {
+      toast.error(error.response?.data?.message || "An error occurred!", {
         position: "bottom-right",
       });
     } finally {

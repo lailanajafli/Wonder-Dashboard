@@ -1,17 +1,23 @@
-// Router
 import { Link, NavLink, useNavigate } from "react-router-dom";
-// Icons
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+
 const Header = () => {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); 
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    toast.success("Checked out👋", {
+    toast.success("Checked out 👋", {
       position: "bottom-right",
     });
-
+    setIsLoggedIn(false); 
     navigate("/login");
   };
 
@@ -41,14 +47,17 @@ const Header = () => {
             </ul>
           </nav>
           <div className="userArea">
-            <button onClick={handleLogout} className="logOut">
-              LOG OUT
-              <FaSignOutAlt />
-            </button>
-            <Link className="login" to="/login">
-              <FaUserCircle />
-              <span>LOG IN</span>
-            </Link>
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="logOut">
+                LOG OUT
+                <FaSignOutAlt />
+              </button>
+            ) : (
+              <Link className="login" to="/login">
+                <FaUserCircle />
+                <span>LOG IN</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>
