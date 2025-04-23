@@ -146,6 +146,7 @@ const CreateProduct = () => {
                       <input
                         className={errors.category && "error"}
                         type="text"
+                        placeholder="Example: hand-care"
                         name="category"
                         {...register("category")}
                       />
