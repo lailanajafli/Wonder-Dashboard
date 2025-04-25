@@ -6,14 +6,13 @@ import Loader from "../components/Loader";
 
 const AllProducts = () => {
   const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]); // Məhsul siyahısını local state-də saxlayırıq
+  const [products, setProducts] = useState([]);
 
-  // API-dən məhsulları yükləmək
   const getAllProducts = async () => {
     setLoading(true);
     try {
       const res = await axios.get(process.env.REACT_APP_ALL_PRODUCTS);
-      setProducts(res.data); // Yüklənən məhsulları local state-ə əlavə edirik
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -21,14 +20,12 @@ const AllProducts = () => {
     }
   };
 
-  // Məhsul silmək
   const deleteProduct = async (id) => {
     setLoading(true);
     try {
       await axios.delete(`${process.env.REACT_APP_DELETE}/${id}`);
-      // Silinən məhsulu local state-dən çıxarırıq
       const updatedProducts = products.filter((product) => product.id !== id);
-      setProducts(updatedProducts); // Yeni məhsul siyahısını state-ə təyin edirik
+      setProducts(updatedProducts); 
     } catch (error) {
       console.log(error);
     } finally {
@@ -36,13 +33,12 @@ const AllProducts = () => {
     }
   };
 
-  // İlk render zamanı məhsul siyahısını yükləyirik
   useEffect(() => {
     getAllProducts();
   }, []);
 
   if (loading) {
-    return <Loader />; // Yüklənmə zamanı Loader göstərilir
+    return <Loader />; 
   }
 
   return (
